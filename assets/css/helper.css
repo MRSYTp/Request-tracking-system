@@ -1,0 +1,38 @@
+  /* استایل پیام موفقیت */
+  .success-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background-color: #d4edda; /* رنگ پس‌زمینه موفقیت */
+    color: #155724; /* رنگ متن */
+    border: 1px solid #c3e6cb; /* رنگ حاشیه */
+    border-radius: 5px; /* گوشه‌های گرد */
+    padding: 15px 20px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+  }
+    /* استایل پیام خطا */
+    .error-message {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        background-color: #f8d7da; /* رنگ پس‌زمینه خطا */
+        color: #721c24; /* رنگ متن */
+        border: 1px solid #f5c6cb; /* رنگ حاشیه */
+        border-radius: 5px; /* گوشه‌های گرد */
+        padding: 15px 20px;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 80%;
+        max-width: 400px;
+        text-align: center;
+      }
