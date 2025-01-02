@@ -22,29 +22,52 @@ class requestModel extends baseModel
         ]);
     }
 
-    // /**
-    //  * دریافت درخواست‌ها بر اساس کاربر
-    //  *
-    //  * @param int $userId
-    //  * @return array
-    //  */
-    // public function getRequestsByUser(int $userId): array
-    // {
-    //     $sql = "SELECT * FROM {$this->table} WHERE user_id = :user_id";
-    //     $stmt = $this->query($sql, ['user_id' => $userId]);
-    //     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-    // }
 
-    // /**
-    //  * دریافت یک درخواست بر اساس ID
-    //  *
-    //  * @param int $id
-    //  * @return array|null
-    //  */
-    // public function getRequestById(int $id): ?array
-    // {
-    //     $sql = "SELECT * FROM {$this->table} WHERE id = :id";
-    //     $stmt = $this->query($sql, ['id' => $id]);
-    //     return $stmt->fetch(\PDO::FETCH_ASSOC) ?: null;
-    // }
+    public function getRequests(int $status = null): array
+    {
+        $condition = '';
+        if (isset($status)) {
+            $condition = 'WHERE status = :status';
+        }
+        $sql = "SELECT * FROM {$this->table} $condition ORDER BY priority DESC, created_at DESC";
+        $stmt = $this->query($sql, isset($status) ? ['status' => $status] : [] );
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+
+    public function getRequestCountByCategoryID(int $category_id, int $status = null) : int
+    {
+        $condition = '';
+        $executeSection = ['category' => $category_id];
+        if (isset($status)) {
+            $condition = 'AND status = :status';
+            $executeSection = ['category' => $category_id , 'status' => $status];
+        }
+        $sql = "SELECT * FROM {$this->table} WHERE category = :category $condition";
+        $stmt = $this->query($sql, $executeSection);
+        $result =  $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return count($result);
+    }
+
+
+    public function getRequestCountByPriorityID(int $priority_id, int $status = null) : int
+    {
+        $condition = '';
+        $executeSection = ['priority' => $priority_id];
+        if (isset($status)) {
+            $condition = 'AND status = :status';
+            $executeSection = ['priority' => $priority_id , 'status' => $status];
+        }
+        $sql = "SELECT * FROM {$this->table} WHERE priority = :priority $condition";
+        $stmt = $this->query($sql, $executeSection);
+        $result =  $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return count($result);
+    }
+
+
+    public function requestToggleStatus(int $id) : int {
+        $sql = "UPDATE {$this->table} SET status = 1 - status WHERE id = :id ";
+        $stmt = $this->query($sql, [':id' => $id]);
+        return $stmt->rowCount();
+    }
 }

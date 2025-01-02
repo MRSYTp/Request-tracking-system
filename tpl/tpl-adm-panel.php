@@ -16,12 +16,10 @@
     <link href="<?= TRACK_URL ?>vendors/bootstrap-rtl/dist/css/bootstrap-rtl.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="<?= TRACK_URL ?>vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="<?= TRACK_URL ?>vendors/nprogress/nprogress.css" rel="stylesheet">
+
     <!-- bootstrap-progressbar -->
     <link href="<?= TRACK_URL ?>vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="<?= TRACK_URL ?>vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
     <!-- bootstrap-daterangepicker -->
     <link href="<?= TRACK_URL ?>vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
     
@@ -128,51 +126,68 @@
 <!-- page content -->
 <div class="right_col" role="main">
     <!-- top tiles -->
-    <div class="row tile_count">
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-user"></i> تعداد کاربران</span>
-            <div class="count">2500</div>
-            <span class="count_bottom"><i class="green">4% </i> از هفته گذشته</span>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-clock-o"></i> میانگین زمان</span>
-            <div class="count">123.50</div>
-            <span class="count_bottom"><i class="green"><i
-                    class="fa fa-sort-asc"></i>3% </i> از هفته گذشته</span>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-user"></i> مجموع مردان</span>
-            <div class="count green">2,500</div>
-            <span class="count_bottom"><i class="green"><i
-                    class="fa fa-sort-asc"></i>34% </i> از هفته گذشته</span>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-user"></i> مجموع زنان</span>
-            <div class="count">4,567</div>
-            <span class="count_bottom"><i class="red"><i
-                    class="fa fa-sort-desc"></i>12% </i> از هفته گذشته</span>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-user"></i> مجموعه کلی</span>
-            <div class="count">2,315</div>
-            <span class="count_bottom"><i class="green"><i
-                    class="fa fa-sort-asc"></i>34% </i> از هفته گذشته</span>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-user"></i> مجموع اتصالات</span>
-            <div class="count">7,325</div>
-            <span class="count_bottom"><i class="green"><i
-                    class="fa fa-sort-asc"></i>34% </i> از هفته گذشته</span>
-        </div>
+    <div class="row top_tiles">
+        <?php foreach(PriorityProblem as $key => $value)  :?>
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-paper-plane"></i></div>
+                    <div class="count"><?= $requestModel->getRequestCountByPriorityID($key); ?></div>
+                    <h3> تعداد الویت <?= $value ?></h3>
+                    <p class="count_bottom" style="display: inline;">
+                     بسته ها :  
+                        <i class="red"><?= $requestModel->getRequestCountByPriorityID($key,1);?></i> 
+                    </p>
+                     باز ها :   
+                    <span class="count_bottom">
+                        <i class="green"><?= $requestModel->getRequestCountByPriorityID($key,0);?></i> 
+                    </span>
+                </div>
+            </div>
+        <?php endforeach; ?>
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-archive"></i></div>
+                    <div class="count"><?= count($requestModel->getRequests());?></div>
+                    <h3>تعداد کل</h3>
+                    <p class="count_bottom" style="display: inline;">
+                    بسته ها :  
+                        <i class="red"><?= count($requestModel->getRequests(1));?></i> 
+                    </p>
+                    باز ها :  
+                    <span class="count_bottom">
+                        <i class="green"><?= count($requestModel->getRequests(0));?></i> 
+                    </span>
+                </div>
+            </div>
     </div>
+    <!-- <h3>تعداد درخواست های دسته بندی شده:</h3> -->
+    <div class="row tile_count">
+        <?php foreach(CategoryProblem as $key => $value): ?>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-paper-plane-o"></i> تعداد <?= $value ?> </span>
+            <div class="count"><?= $requestModel->getRequestCountByCategoryID($key); ?></div>
+            <span class="count_bottom">
+            تعداد باز و بسته ها :  
+                <i class="red"><?= $requestModel->getRequestCountByCategoryID($key,1); ?></i> 
+            </span>
+            |
+            <span class="count_bottom">
+                <i class="green"><?= $requestModel->getRequestCountByCategoryID($key,0); ?></i> 
+            </span>
+        </div>
+        <?php endforeach; ?>
+    </div>
+
     <!-- /top tiles -->
     <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>طراحی جدول
-                            <small>طراحی شخصی شده</small>
-                        </h2>
-
+                        <h2>طراحی جدول</h2>
+                        <div class="holder-status pull-left">
+                        <a href="<?=site_url('adm-panel.php?req=1')?>" class="btn btn-danger">بسته ها</a>
+                        <a href="<?=site_url('adm-panel.php?req=0')?>" class="btn btn-success">باز ها</a>
+                        <a href="<?=site_url('adm-panel.php')?>" class="btn btn-primary">همه</a>
+                        </div>
                         <div class="clearfix"></div>
                     </div>
 
@@ -182,177 +197,51 @@
                             <table class="table table-striped jambo_table bulk_action">
                                 <thead>
                                 <tr class="headings">
-                                    <th>
-                                        <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" id="check-all" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-                                    </th>
-                                    <th class="column-title">صورتحساب</th>
-                                    <th class="column-title">تاریخ صورتحساب</th>
-                                    <th class="column-title">سفارش</th>
-                                    <th class="column-title">پرداخت به نام</th>
+                                    <th class="column-title">تایید</th>
+                                    <th class="column-title">ایدی</th>
+                                    <th class="column-title">عنوان</th>
+                                    <th class="column-title">دسته بندی</th>
+                                    <th class="column-title">الویت</th>
                                     <th class="column-title">وضعیت</th>
-                                    <th class="column-title">مقدار</th>
-                                    <th class="column-title no-link last"><span class="nobr">عمل</span>
+                                    <th class="column-title">فایل پیوستی</th>
+                                    <th class="column-title no-link last"><span class="nobr">جزییات بیشتر</span>
                                     </th>
-                                    <th class="bulk-actions" colspan="7">
-                                        <a class="antoo" style="color:#fff; font-weight:500;">عمل همگانی ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-                                    </th>
+
                                 </tr>
                                 </thead>
 
                                 <tbody>
+                                <?php foreach($Requests as $Request) : ?>
                                 <tr class="even pointer">
                                     <td class="a-center ">
-                                        <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                                        <span class="statusToggle fa-check-square-o" data-req="<?=$Request->id ?>" aria-hidden="true"></span>
                                     </td>
-                                    <td class=" ">121000040</td>
-                                    <td class=" ">May 23, 2014 11:47:56 PM</td>
-                                    <td class=" ">121000210 <i class="success fa fa-long-arrow-up"></i></td>
-                                    <td class=" ">John Blank L</td>
-                                    <td class=" ">Paid</td>
-                                    <td class="a-right a-right ">$7.45</td>
+                                    <td class=" "><?= $Request->id ?></td>
+                                    <td class=" "><?= $Request->title ?></td>
+                                    <td class=" "><?= CategoryProblem[$Request->category] ?></td>
+                                    <td class=" "><?= PriorityProblem[$Request->priority] ?></td>
+                                    <td class=" "><?= $Request->status == 1 ? 'بسته' : 'باز' ?></td>
+                                    <td class="a-right a-right "><?= is_null($Request->attachment) ? 'ندارد' : 'دارد' ?></td>
                                     <td class=" last"><a href="#">مشاهده</a>
                                     </td>
                                 </tr>
-                                <tr class="odd pointer">
-                                    <td class="a-center ">
-                                        <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-                                    </td>
-                                    <td class=" ">121000039</td>
-                                    <td class=" ">May 23, 2014 11:30:12 PM</td>
-                                    <td class=" ">121000208 <i class="success fa fa-long-arrow-up"></i>
-                                    </td>
-                                    <td class=" ">John Blank L</td>
-                                    <td class=" ">Paid</td>
-                                    <td class="a-right a-right ">$741.20</td>
-                                    <td class=" last"><a href="#">مشاهده</a>
-                                    </td>
-                                </tr>
-                                <tr class="even pointer">
-                                    <td class="a-center ">
-                                        <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-                                    </td>
-                                    <td class=" ">121000038</td>
-                                    <td class=" ">May 24, 2014 10:55:33 PM</td>
-                                    <td class=" ">121000203 <i class="success fa fa-long-arrow-up"></i>
-                                    </td>
-                                    <td class=" ">Mike Smith</td>
-                                    <td class=" ">Paid</td>
-                                    <td class="a-right a-right ">$432.26</td>
-                                    <td class=" last"><a href="#">مشاهده</a>
-                                    </td>
-                                </tr>
-                                <tr class="odd pointer">
-                                    <td class="a-center ">
-                                        <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-                                    </td>
-                                    <td class=" ">121000037</td>
-                                    <td class=" ">May 24, 2014 10:52:44 PM</td>
-                                    <td class=" ">121000204</td>
-                                    <td class=" ">Mike Smith</td>
-                                    <td class=" ">Paid</td>
-                                    <td class="a-right a-right ">$333.21</td>
-                                    <td class=" last"><a href="#">مشاهده</a>
-                                    </td>
-                                </tr>
-                                <tr class="even pointer">
-                                    <td class="a-center ">
-                                        <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-                                    </td>
-                                    <td class=" ">121000040</td>
-                                    <td class=" ">May 24, 2014 11:47:56 PM</td>
-                                    <td class=" ">121000210</td>
-                                    <td class=" ">John Blank L</td>
-                                    <td class=" ">Paid</td>
-                                    <td class="a-right a-right ">$7.45</td>
-                                    <td class=" last"><a href="#">مشاهده</a>
-                                    </td>
-                                </tr>
-                                <tr class="odd pointer">
-                                    <td class="a-center ">
-                                        <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-                                    </td>
-                                    <td class=" ">121000039</td>
-                                    <td class=" ">May 26, 2014 11:30:12 PM</td>
-                                    <td class=" ">121000208 <i class="error fa fa-long-arrow-down"></i>
-                                    </td>
-                                    <td class=" ">John Blank L</td>
-                                    <td class=" ">Paid</td>
-                                    <td class="a-right a-right ">$741.20</td>
-                                    <td class=" last"><a href="#">مشاهده</a>
-                                    </td>
-                                </tr>
-                                <tr class="even pointer">
-                                    <td class="a-center ">
-                                        <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-                                    </td>
-                                    <td class=" ">121000038</td>
-                                    <td class=" ">May 26, 2014 10:55:33 PM</td>
-                                    <td class=" ">121000203</td>
-                                    <td class=" ">Mike Smith</td>
-                                    <td class=" ">Paid</td>
-                                    <td class="a-right a-right ">$432.26</td>
-                                    <td class=" last"><a href="#">مشاهده</a>
-                                    </td>
-                                </tr>
-                                <tr class="odd pointer">
-                                    <td class="a-center ">
-                                        <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-                                    </td>
-                                    <td class=" ">121000037</td>
-                                    <td class=" ">May 26, 2014 10:52:44 PM</td>
-                                    <td class=" ">121000204</td>
-                                    <td class=" ">Mike Smith</td>
-                                    <td class=" ">Paid</td>
-                                    <td class="a-right a-right ">$333.21</td>
-                                    <td class=" last"><a href="#">مشاهده</a>
-                                    </td>
-                                </tr>
-
-                                <tr class="even pointer">
-                                    <td class="a-center ">
-                                        <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-                                    </td>
-                                    <td class=" ">121000040</td>
-                                    <td class=" ">May 27, 2014 11:47:56 PM</td>
-                                    <td class=" ">121000210</td>
-                                    <td class=" ">John Blank L</td>
-                                    <td class=" ">Paid</td>
-                                    <td class="a-right a-right ">$7.45</td>
-                                    <td class=" last"><a href="#">مشاهده</a>
-                                    </td>
-                                </tr>
-                                <tr class="odd pointer">
-                                    <td class="a-center ">
-                                        <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-                                    </td>
-                                    <td class=" ">121000039</td>
-                                    <td class=" ">May 28, 2014 11:30:12 PM</td>
-                                    <td class=" ">121000208</td>
-                                    <td class=" ">John Blank L</td>
-                                    <td class=" ">Paid</td>
-                                    <td class="a-right a-right ">$741.20</td>
-                                    <td class=" last"><a href="#">مشاهده</a>
-                                    </td>
-                                </tr>
+                                <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                    
                 </div>
             </div>
 
 </div>
 <!-- /page content -->
-
-        <!-- footer content -->
-        <footer class="hidden-print">
+    <footer class="hidden-print">
             <div class="pull-left">
-                Gentelella - قالب پنل مدیریت بوت استرپ <a href="https://colorlib.com">Colorlib</a> | پارسی شده توسط <a
-                    href="https://morteza-karimi.ir">مرتضی کریمی</a>
+                Gentelella - قالب پنل مدیریت بوت استرپ <a href="https://colorlib.com">Colorlib</a> | پارسی شده توسط <a href="https://morteza-karimi.ir">مرتضی کریمی</a>
             </div>
             <div class="clearfix"></div>
         </footer>
-        <!-- /footer content -->
     </div>
 </div>
 <div id="lock_screen">
@@ -372,47 +261,39 @@
 </div>
 <!-- jQuery -->
 <script src="<?= TRACK_URL ?>vendors/jquery/dist/jquery.min.js"></script>
+<script>
+
+            $(document).ready(function() {
+
+                $('span.statusToggle').click(function() {
+
+                    const span = $(this);
+                    const reqid = span.attr("data-req");
+
+
+                    $.ajax({
+                        url: "<?= TRACK_URL . 'process/statusToggle.php' ?>",
+                        method: "POST",
+                        data: { reqid: reqid },
+                        success: function(response) {
+                            if (response = 1) {
+                                span.toggleClass("check");
+                            }
+                        },
+                        error: function() {
+                            alert("مشکلی در ارتباط با سرور وجود دارد.");
+                        }
+                    });
+                });
+            });
+</script>
 <!-- Bootstrap -->
 <script src="<?= TRACK_URL ?>vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- FastClick -->
-<script src="<?= TRACK_URL ?>vendors/fastclick/lib/fastclick.js"></script>
-<!-- NProgress -->
-<script src="<?= TRACK_URL ?>vendors/nprogress/nprogress.js"></script>
 <!-- bootstrap-progressbar -->
 <script src="<?= TRACK_URL ?>vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-<!-- iCheck -->
-<script src="<?= TRACK_URL ?>vendors/iCheck/icheck.min.js"></script>
-
 <!-- bootstrap-daterangepicker -->
 <script src="<?= TRACK_URL ?>vendors/moment/min/moment.min.js"></script>
-
 <script src="<?= TRACK_URL ?>vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-<!-- Chart.js -->
-<script src="<?= TRACK_URL ?>vendors/Chart.js/dist/Chart.min.js"></script>
-<!-- jQuery Sparklines -->
-<script src="<?= TRACK_URL ?>vendors/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
-<!-- gauge.js -->
-<script src="<?= TRACK_URL ?>vendors/gauge.js/dist/gauge.min.js"></script>
-<!-- Skycons -->
-<script src="<?= TRACK_URL ?>vendors/skycons/skycons.js"></script>
-<!-- Flot -->
-<script src="<?= TRACK_URL ?>vendors/Flot/jquery.flot.js"></script>
-<script src="<?= TRACK_URL ?>vendors/Flot/jquery.flot.pie.js"></script>
-<script src="<?= TRACK_URL ?>vendors/Flot/jquery.flot.time.js"></script>
-<script src="<?= TRACK_URL ?>vendors/Flot/jquery.flot.stack.js"></script>
-<script src="<?= TRACK_URL ?>vendors/Flot/jquery.flot.resize.js"></script>
-<!-- Flot plugins -->
-<script src="<?= TRACK_URL ?>vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-<script src="<?= TRACK_URL ?>vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-<script src="<?= TRACK_URL ?>vendors/flot.curvedlines/curvedLines.js"></script>
-<!-- DateJS -->
-<script src="<?= TRACK_URL ?>vendors/DateJS/build/production/date.min.js"></script>
-<!-- JQVMap -->
-<script src="<?= TRACK_URL ?>vendors/jqvmap/dist/jquery.vmap.js"></script>
-<script src="<?= TRACK_URL ?>vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-<script src="<?= TRACK_URL ?>vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-
 <!-- Custom Theme Scripts -->
 <script src="<?= TRACK_URL ?>assets/js/custom.min.js"></script>
 
