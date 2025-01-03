@@ -1,8 +1,8 @@
 <?php 
 require '../bootstrap/init.php';
 
-if (isset($_POST['reqid']) && is_numeric($_POST['reqid'])) {
+if (isset($_POST['reqid']) && $_POST['reqid'] > 0) {
 
-    var_dump($requestModel->requestToggleStatus($_POST['reqid']));
+    echo $requestModel->requestToggleStatus($_POST['reqid']);
 
 }

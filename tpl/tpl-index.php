@@ -93,7 +93,7 @@
                                         <option value="3">مشکل امور مالی</option>
                                         <option value="4">مشکل در خرید</option>
                                         <option value="5">درخواست ویژگی جدید</option>
-                                        <option value="5">سایر موارد</option>
+                                        <option value="6">سایر موارد</option>
                                     </select>
                                 </div>
                             </div>
@@ -130,7 +130,7 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">فایل پیوست 
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="file" id="attachment" name="attachment" >
+                                    <input type="file" id="attachment" name="attachment" accept=".jpg,.png,.pdf,.docx">
                                 </div>
                             </div>
                             <div class="ln_solid"></div>
@@ -145,6 +145,16 @@
                 </div>
             </div>
 <!-- /page content -->
+ 
+        <!-- footer content -->
+        <footer class="hidden-print">
+            <div class="pull-left">
+                Gentelella - قالب پنل مدیریت بوت استرپ <a href="https://colorlib.com">Colorlib</a> | پارسی شده توسط <a
+                    href="https://morteza-karimi.ir">مرتضی کریمی</a>
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
     </div>
 </div>
 <!-- jQuery -->

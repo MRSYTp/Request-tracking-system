@@ -1,0 +1,6 @@
+{
+    "require": {
+        "hekmatinasser/verta": "^8.4",
+        "phpmailer/phpmailer": "^6.9"
+    }
+}

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -8,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="fontiran.com:license" content="Y68A9">
-    <link rel="icon" href="../build/images/favicon.ico" type="image/ico"/>
-    <title>Gentelella Alela! | قالب مدیریت رایگان </title>
+    <link rel="icon" href="<?= TRACK_URL ?>/assets/images/favicon.ico" type="image/ico"/>
+    <title>Admin panel</title>
 
     <!-- Bootstrap -->
     <link href="<?= TRACK_URL ?>vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -30,10 +29,10 @@
 <body class="nav-md">
 <div class="container body">
     <div class="main_container">
-        <div class="col-md-3 left_col hidden-print">
-            <div class="left_col scroll-view">
+        <div class="col-md-3 left_col hidden-print menu_fixed">
+            <div class="left_col scroll-view menu_fixed">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+                    <p class="site_title"><i class="fa fa-fire"></i> <span>Tracking Panel</span></p>
                 </div>
 
                 <div class="clearfix"></div>
@@ -197,13 +196,13 @@
                             <table class="table table-striped jambo_table bulk_action">
                                 <thead>
                                 <tr class="headings">
-                                    <th class="column-title">تایید</th>
                                     <th class="column-title">ایدی</th>
                                     <th class="column-title">عنوان</th>
                                     <th class="column-title">دسته بندی</th>
                                     <th class="column-title">الویت</th>
                                     <th class="column-title">وضعیت</th>
                                     <th class="column-title">فایل پیوستی</th>
+                                    <th class="column-title">تاریخ ثبت</th>
                                     <th class="column-title no-link last"><span class="nobr">جزییات بیشتر</span>
                                     </th>
 
@@ -213,16 +212,14 @@
                                 <tbody>
                                 <?php foreach($Requests as $Request) : ?>
                                 <tr class="even pointer">
-                                    <td class="a-center ">
-                                        <span class="statusToggle fa-check-square-o" data-req="<?=$Request->id ?>" aria-hidden="true"></span>
-                                    </td>
-                                    <td class=" "><?= $Request->id ?></td>
+                                    <td class="a-center"><?= $Request->id ?></td>
                                     <td class=" "><?= $Request->title ?></td>
                                     <td class=" "><?= CategoryProblem[$Request->category] ?></td>
                                     <td class=" "><?= PriorityProblem[$Request->priority] ?></td>
                                     <td class=" "><?= $Request->status == 1 ? 'بسته' : 'باز' ?></td>
-                                    <td class="a-right a-right "><?= is_null($Request->attachment) ? 'ندارد' : 'دارد' ?></td>
-                                    <td class=" last"><a href="#">مشاهده</a>
+                                    <td class=" "><i class="fa fa-<?= is_null($Request->attachment) ? 'times' : 'check' ?>"></i></td>
+                                    <td class="a-right a-right "><?= verta($Request->created_at)->format('Y.m.d');?></td>
+                                    <td class=" last"><a href="<?=site_url("request-singlePage.php?reqID={$Request->id}")?>">مشاهده</a>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -261,32 +258,7 @@
 </div>
 <!-- jQuery -->
 <script src="<?= TRACK_URL ?>vendors/jquery/dist/jquery.min.js"></script>
-<script>
 
-            $(document).ready(function() {
-
-                $('span.statusToggle').click(function() {
-
-                    const span = $(this);
-                    const reqid = span.attr("data-req");
-
-
-                    $.ajax({
-                        url: "<?= TRACK_URL . 'process/statusToggle.php' ?>",
-                        method: "POST",
-                        data: { reqid: reqid },
-                        success: function(response) {
-                            if (response = 1) {
-                                span.toggleClass("check");
-                            }
-                        },
-                        error: function() {
-                            alert("مشکلی در ارتباط با سرور وجود دارد.");
-                        }
-                    });
-                });
-            });
-</script>
 <!-- Bootstrap -->
 <script src="<?= TRACK_URL ?>vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- bootstrap-progressbar -->
