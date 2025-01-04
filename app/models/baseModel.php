@@ -2,6 +2,10 @@
 
 namespace app\models;
 
+if(!defined('TRACK_PATH')){
+    echo "permision denid!";
+    die();
+}
 
 use PDO;
 

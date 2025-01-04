@@ -14,12 +14,6 @@
     <link href="<?= TRACK_URL ?>vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?= TRACK_URL ?>vendors/bootstrap-rtl/dist/css/bootstrap-rtl.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="<?= TRACK_URL ?>vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="<?= TRACK_URL ?>vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- Animate.css -->
-    <link href="<?= TRACK_URL ?>vendors/animate.css/animate.min.css" rel="stylesheet">
-
     <!-- Custom Theme Style -->
     <link href="<?= TRACK_URL ?>assets/css/custom.css" rel="stylesheet">
     <link href="<?= TRACK_URL ?>assets/css/helper.css" rel="stylesheet">

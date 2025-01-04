@@ -1,7 +1,11 @@
 <?php 
 namespace app\services;
-
+if(!defined('TRACK_PATH')){
+    echo "permision denid!";
+    die();
+}
 class fileValidator
+
 {
     private array $allowedMimeTypes = [
         'image/jpeg',

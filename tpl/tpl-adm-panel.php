@@ -260,14 +260,9 @@
 </div>
 <!-- jQuery -->
 <script src="<?= TRACK_URL ?>vendors/jquery/dist/jquery.min.js"></script>
-
 <!-- Bootstrap -->
 <script src="<?= TRACK_URL ?>vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- bootstrap-progressbar -->
-<script src="<?= TRACK_URL ?>vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-<!-- bootstrap-daterangepicker -->
-<script src="<?= TRACK_URL ?>vendors/moment/min/moment.min.js"></script>
-<script src="<?= TRACK_URL ?>vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
 <!-- Custom Theme Scripts -->
 <script src="<?= TRACK_URL ?>assets/js/custom.min.js"></script>
 

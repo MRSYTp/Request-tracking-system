@@ -1,5 +1,8 @@
 <?php 
-
+if(!defined('TRACK_PATH')){
+    echo "permision denid!";
+    die();
+}
 use app\models\userModel;
 use app\models\requestModel;
 use app\services\validation;

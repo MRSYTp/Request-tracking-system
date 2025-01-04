@@ -1,7 +1,10 @@
 <?php 
 
 namespace app\models;
-
+if(!defined('TRACK_PATH')){
+    echo "permision denid!";
+    die();
+}
 use app\services\validation;
 use PDO;
 

@@ -225,20 +225,6 @@
 </script>
 <!-- Bootstrap -->
 <script src="<?= TRACK_URL ?>/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- FastClick -->
-<script src="<?= TRACK_URL ?>/vendors/fastclick/lib/fastclick.js"></script>
-<!-- NProgress -->
-<script src="<?= TRACK_URL ?>/vendors/nprogress/nprogress.js"></script>
-<!-- bootstrap-progressbar -->
-<script src="<?= TRACK_URL ?>/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-<!-- iCheck -->
-<script src="<?= TRACK_URL ?>/vendors/iCheck/icheck.min.js"></script>
-
-<!-- bootstrap-daterangepicker -->
-<script src="<?= TRACK_URL ?>/vendors/moment/min/moment.min.js"></script>
-
-<script src="<?= TRACK_URL ?>/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-
 
 <!-- Custom Theme Scripts -->
 <script src="<?= TRACK_URL ?>/assets/js/custom.min.js"></script>

@@ -1,6 +1,9 @@
 <?php 
 namespace app\models;
-
+if(!defined('TRACK_PATH')){
+    echo "permision denid!";
+    die();
+}
 class requestModel extends baseModel
 {
     protected string $table = 'requests'; // نام جدول مرتبط

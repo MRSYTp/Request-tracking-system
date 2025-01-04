@@ -1,6 +1,9 @@
 <?php
 namespace app\services;
-
+if(!defined('TRACK_PATH')){
+    echo "permision denid!";
+    die();
+}
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
