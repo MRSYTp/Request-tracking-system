@@ -233,12 +233,14 @@
 
 </div>
 <!-- /page content -->
-    <footer class="hidden-print">
-            <div class="pull-left">
-                Gentelella - قالب پنل مدیریت بوت استرپ <a href="https://colorlib.com">Colorlib</a> | پارسی شده توسط <a href="https://morteza-karimi.ir">مرتضی کریمی</a>
+        <!-- footer content -->
+        <footer class="hidden-print">
+            <div class="pull-left"> 
+                created By  <a href="https://www.linkedin.com/in/mohammadreza-salehi-5681a2339/">Mohammadreza salehi</a>
             </div>
             <div class="clearfix"></div>
         </footer>
+        <!-- /footer content -->
     </div>
 </div>
 <div id="lock_screen">

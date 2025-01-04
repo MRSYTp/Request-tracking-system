@@ -45,7 +45,7 @@
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                aria-expanded="false">
-                                <img src="<?= TRACK_URL ?>assets/images/img.jpg" alt="">مرتضی کریمی
+                               <img src="<?= $gravatar->getGravatarUrl(); ?>" alt='User Avatar' /> <?= $currentUser->username; ?>
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">                               
@@ -130,7 +130,8 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">فایل پیوست 
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="file" id="attachment" name="attachment" accept=".jpg,.png,.pdf,.docx">
+                                    <input type="file" id="attachment" name="attachment" accept=".jpg,.jpeg,.png,.gif,.pdf,.doc,.docx,.xlsx">
+                                    (Max size: 5MB)
                                 </div>
                             </div>
                             <div class="ln_solid"></div>
@@ -148,9 +149,8 @@
  
         <!-- footer content -->
         <footer class="hidden-print">
-            <div class="pull-left">
-                Gentelella - قالب پنل مدیریت بوت استرپ <a href="https://colorlib.com">Colorlib</a> | پارسی شده توسط <a
-                    href="https://morteza-karimi.ir">مرتضی کریمی</a>
+            <div class="pull-left"> 
+                created By  <a href="https://www.linkedin.com/in/mohammadreza-salehi-5681a2339/">Mohammadreza salehi</a>
             </div>
             <div class="clearfix"></div>
         </footer>

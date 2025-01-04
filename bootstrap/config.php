@@ -1,9 +1,9 @@
 <?php 
 
-
 use app\models\userModel;
 use app\models\requestModel;
 use app\services\validation;
+use app\services\fileValidator;
 
 
 
@@ -25,4 +25,6 @@ $userModel->setValidation($validation);
 // ایجاد مدل درخواست
 $requestModel = new requestModel($pdo);
 
-
+// ایجاد مدل اعتبارسنجی
+$maxFileSize = 5 * 1024 * 1024;   // 5MB
+$fileValidator = new fileValidator($maxFileSize);
