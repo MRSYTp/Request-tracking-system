@@ -1,6 +1,14 @@
 <?php 
 require "bootstrap/init.php";
 
+if (isset($_GET['action']) && $_GET['action'] == 'logout') {
+    unset($_SESSION['admin']);
+    redirect('adm-form.php');
+}
+
+if (!isset($_SESSION['admin'])) {
+    redirect('pageEroor.php');
+}
 
 
 if (isset($_GET['reqID']) && $_GET['reqID'] > 0) {

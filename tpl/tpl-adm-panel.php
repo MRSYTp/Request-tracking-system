@@ -40,11 +40,11 @@
                 <!-- menu profile quick info -->
                 <div class="profile clearfix">
                     <div class="profile_pic">
-                        <img src="<?= TRACK_URL ?>assets/images/img.jpg" alt="..." class="img-circle profile_img">
+                        <img src="<?= TRACK_URL ?>assets/images/user.png" alt="..." class="img-circle profile_img">
                     </div>
                     <div class="profile_info">
-                        <span>خوش آمدید,</span>
-                        <h2>مرتضی کریمی</h2>
+                        <span>خوش آمدید</span>
+                        <h2><?= $_SESSION['admin'] ?> </h2>
                     </div>
                 </div>
                 <!-- /menu profile quick info -->
@@ -108,11 +108,11 @@
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                aria-expanded="false">
-                                <img src="<?= TRACK_URL ?>assets/images/img.jpg" alt="">مرتضی کریمی
+                                <img src="<?= TRACK_URL ?>assets/images/user.png" alt=""><?= $_SESSION['admin'] ?> 
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">                               
-                                <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> خروج</a></li>
+                                <li><a href="<?= site_url('adm-panel.php?action=logout')?>"><i class="fa fa-sign-out pull-right"></i> خروج</a></li>
                             </ul>
                         </li>
                     </ul>

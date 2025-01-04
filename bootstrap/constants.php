@@ -18,3 +18,8 @@ const PriorityProblem = [
     2  => 'متوسط',
     3 => 'زیاد',
 ];
+
+
+const admPanel = [
+    'mohamadreza' => '$2y$10$XXGIbvVivETefc4Xvb48/O3wIh4FExTSQfCVx7v7PqRhk9gp6hz5i'
+];
