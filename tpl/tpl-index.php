@@ -30,17 +30,13 @@
     <link href="<?= TRACK_URL ?>assets/css/helper.css" rel="stylesheet">
 </head>
 <!-- /header content -->
-<body class="nav-md">
+<body class="nav-md" style="background: #f7f7f7;">
 <div class="container body">
     <div class="main_container">
         <!-- top navigation -->
-        <div class="top_nav hidden-print">
+        <div class="top_nav hidden-print" style="margin: 0px;">
             <div class="nav_menu">
                 <nav>
-                    <div class="nav toggle">
-                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-                    </div>
-
                     <ul class="nav navbar-nav navbar-right">
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
@@ -56,14 +52,10 @@
                 </nav>
             </div>
         </div>
-        <!-- /top navigation -->
-        <!-- /header content -->
         
-<!-- page content -->
-<div class="right_col" role="main">
-    <!-- top tiles -->
 
-    <!-- /top tiles -->
+<div class="right_col" role="main" style=" margin: 0px;">
+
     <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_content">
@@ -148,7 +140,7 @@
 <!-- /page content -->
  
         <!-- footer content -->
-        <footer class="hidden-print">
+        <footer class="hidden-print" style="background: #f7f7f7;">
             <div class="pull-left"> 
                 created By  <a href="https://www.linkedin.com/in/mohammadreza-salehi-5681a2339/">Mohammadreza salehi</a>
             </div>

@@ -38,7 +38,7 @@ class requestModel extends baseModel
     }
 
 
-    public function getRequestCountByCategoryID(int $category_id, int $status = null) : int
+    public function getRequestCountByCategoryID(int $category_id, int $status = null) : array|bool
     {
         $condition = '';
         $executeSection = ['category' => $category_id];
@@ -48,8 +48,8 @@ class requestModel extends baseModel
         }
         $sql = "SELECT * FROM {$this->table} WHERE category = :category $condition";
         $stmt = $this->query($sql, $executeSection);
-        $result =  $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        return count($result);
+        $result =  $stmt->fetchAll(\PDO::FETCH_OBJ);
+        return $result;
     }
 
 

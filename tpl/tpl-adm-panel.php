@@ -59,8 +59,7 @@
                             <li><a><i class="fa fa-table"></i> خانه <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="index.html">داشبورد</a></li>
-                                    <li><a href="index2.html">داشبورد ۲</a></li>
-                                    <li><a href="index3.html">داشبورد ۳</a></li>
+
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-desktop"></i> عناصر ظاهری <span
@@ -164,14 +163,14 @@
         <?php foreach(CategoryProblem as $key => $value): ?>
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-paper-plane-o"></i> تعداد <?= $value ?> </span>
-            <div class="count"><?= $requestModel->getRequestCountByCategoryID($key); ?></div>
+            <div class="count"><?= count($requestModel->getRequestCountByCategoryID($key)); ?></div>
             <span class="count_bottom">
             تعداد باز و بسته ها :  
-                <i class="red"><?= $requestModel->getRequestCountByCategoryID($key,1); ?></i> 
+                <i class="red"><?= count($requestModel->getRequestCountByCategoryID($key,1)); ?></i> 
             </span>
             |
             <span class="count_bottom">
-                <i class="green"><?= $requestModel->getRequestCountByCategoryID($key,0); ?></i> 
+                <i class="green"><?= count($requestModel->getRequestCountByCategoryID($key,0)); ?></i> 
             </span>
         </div>
         <?php endforeach; ?>
@@ -191,7 +190,20 @@
                     </div>
 
                     <div class="x_content">
-
+                        <div class="row align-items-center mb-3">
+                            <div class="col-sm-6">
+                                <label for="entries-select" class="form-label">
+                                    نمایش 
+                                    <select id="entries-select" name="entries" class="form-select form-select-sm d-inline-block w-auto mx-1">
+                                        <option value="">انتخاب گزینه</option>
+                                        <?php foreach(CategoryProblem as $key => $value) : ?>
+                                            <option value="<?= $key ?>"><?= $value ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    درخواست‌ها
+                                </label>
+                            </div>
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-striped jambo_table bulk_action">
                                 <thead>
@@ -260,6 +272,58 @@
 </div>
 <!-- jQuery -->
 <script src="<?= TRACK_URL ?>vendors/jquery/dist/jquery.min.js"></script>
+<script>
+const CategoryProblem = <?php echo json_encode(CategoryProblem); ?>;
+const PriorityProblem = <?php echo json_encode(PriorityProblem); ?>;
+$(document).ready(function() {
+    $('#entries-select').on('change', function() {
+        var selectedValue = $(this).val(); // مقدار انتخاب شده
+        var getValue = '<?php echo isset($_GET["req"]) ? $_GET["req"] : null; ?>'; // مقدار $_GET یا null
+
+        $.ajax({
+            url: "<?= TRACK_URL . 'process/getRequest.php' ?>", // مسیر فایل PHP
+            method: 'POST', // متد POST
+            data: { 
+                category: selectedValue, // مقدار انتخاب شده از select
+                status: getValue // مقدار $_GET (یا null)
+            },
+            success: function(response) {
+            // اطمینان از این که داده‌ها به درستی دریافت شده‌اند
+            if (response) {
+                let requests = JSON.parse(response); // تبدیل داده‌های JSON به آرایه جاوااسکریپت
+                updateTable(requests); // به‌روزرسانی جدول با داده‌های دریافت‌شده
+            }
+            },
+            error: function(xhr, status, error) {
+                console.error('خطا در ارسال:', error); // مدیریت خطا
+            }
+        });
+    });
+});
+
+function updateTable(requests) {
+    let tbody = $('table tbody'); // انتخاب tbody جدول
+    tbody.empty(); // پاک کردن محتوای قبلی جدول
+
+    requests.forEach(function(request) {
+        let row = `
+            <tr class="even pointer">
+                <td class="a-center">${request.id}</td>
+                <td class=" ">${request.title}</td>
+                <td class=" ">${CategoryProblem[request.category]}</td>
+                <td class=" ">${PriorityProblem[request.priority]}</td>
+                <td class=" ">${request.status == 1 ? 'بسته' : 'باز'}</td>
+                <td class=" "><i class="fa fa-${request.attachment === null ? 'times' : 'check'}"></i></td>
+                <td class="a-right a-right ">${request.created_at}</td>
+                <td class=" last"><a href="request-singlePage.php?reqID=${request.id}">مشاهده</a></td>
+            </tr>
+        `;
+        tbody.append(row); // اضافه کردن سطر به جدول
+    });
+}
+
+
+</script>
 <!-- Bootstrap -->
 <script src="<?= TRACK_URL ?>vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 
